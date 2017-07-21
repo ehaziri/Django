@@ -1,0 +1,61 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'books_app/css/styles.css' %}" />
+    <style>
+    #books{
+      margin-left: 10px;
+    }
+    .book_reviews{
+      border-top: 1px solid black;
+    }
+    #all_books a{
+      display: block;
+    }
+    #all_books{
+      border: 1px solid black;
+      width: 200px;
+      height: 100px;
+      overflow: scroll;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <h1>Welcome, {{request.session.user.name}}!</h1>
+        <p>
+          <a href="{% url 'books:add' %}">Add Book and Review</a>
+          <a href="{% url 'users:logout' %}">Logout</a>
+        </p>
+      </div><!--header-->
+      <div id="sidebar">
+        <h3>Recent Book Reviews</h3>
+        <div id="books">
+          {% for review in last_three_reviews %}
+            <div class="book_reviews">
+              <h3><a href="{% url 'books:show_book' id=review.book.id %}">{{review.book.title}}</a></h3>
+              <p>Rating: {{review.rating}}</p>
+              <p>
+                <a href="{% url 'books:show_creator' id=review.creator.id %}">{{review.creator.name}}</a>
+                says: {{review.comment}}
+              </p>
+              <p>Posted on {{review.created_at}}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div><!--sidebar-->
+      <div id="content">
+        <h3>Other Books with Reviews:</h3>
+        <div id="all_books">
+          {% for book in all_books_reviewed %}
+            <a href="{% url 'books:show_book' id=book.id %}">{{book.title}}</a>
+          {% endfor %}
+        </div>
+      </div><!--content-->
+    </div><!--wrapper-->
+  </body>
+</html>

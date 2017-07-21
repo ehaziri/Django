@@ -1,0 +1,63 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Show</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'books_app/css/styles.css' %}" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <p>
+          <a href="{% url 'books:index' %}">Home</a>
+          <a href="{% url 'users:logout' %}">Logout</a>
+        </p>
+      </div><!--header-->
+      <div class="messages">
+        {% if messages %}
+          <ul>
+              {% for message in messages %}
+              <li>{{ message }}</li>
+              {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <div id="sidebar">
+        <h4>{{book.title}}</h4>
+        <h5>Author: {{book.author.name}}</h5>
+        <div id="all_reviews">
+          <!-- Ketu for loop to 3 -->
+          {% for review in book.book_reviews.all %}
+          <div class="book_review">
+            <p>Rating: {{review.rating}}</p>
+            <p>
+              <a href="{% url 'books:show_creator' id=review.creator.id %}">{{review.creator.name}}</a> says: {{review.review}}
+            </p>
+            <p>Posted on {{ review.created_at|date:"M d, Y" }}</p>
+            {% if request.session.user.name == review.creator.name %}
+              <a href="{% url 'books:delete_review' id=review.id %}">Delete this review</a>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div><!--sidebar-->
+      <div id="content">
+        <h3>Add a Review:</h3>
+        <form action="{% url 'books:add_review' id=book.id %}" method="post">
+          {% csrf_token %}
+          <textarea name="review"></textarea>
+          <lable for="rating">Rating:
+            <select name="rating">
+              {% for i in loop_times %}
+              <option value="{{i}}">{{i}}</option>
+              {% endfor %}
+            </select>
+            stars.
+          </lable>
+          <input type="submit" value="Submit">
+       </form>
+      </div><!--content-->
+    </div><!--wrapper-->
+  </body>
+</html>

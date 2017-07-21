@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Success</title>
+    <style>
+      .success{
+        width: 400px;
+        border: 1px solid black;
+        background-color: green;
+        color: black;
+        margin: 20px 10px;
+        text-align: center;
+        padding: 5px;
+      }
+      .underline{
+        text-decoration: underline;
+      }
+      .indent{
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="success">
+      The email address you entered: {{request.session.email}} , is a VALID email address! Thank you!
+    </div>
+    <p class="underline">Email Addresses Entered:</p>
+    <table class="indent">
+    {% for email in all_emails %}
+    <tr>
+        <td>{{email.email}}</td>
+        <td>{{email.created_at}}</td>
+        <td><a href="/delete/{{email.id}}">Delete</a></td>
+    </tr>
+    {% endfor%}
+    </table>
+  </body>
+</html>

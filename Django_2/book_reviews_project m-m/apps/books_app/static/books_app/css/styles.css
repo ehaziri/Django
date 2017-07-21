@@ -1,0 +1,31 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  }
+  #wrapper{
+  width: 970px;
+  margin: 0px auto;
+  padding: 10px;
+  }
+  #header{
+  width: 970px;
+  /*background-color: silver;*/
+  }
+  #sidebar, #content{
+  padding: 20px;
+  background-color: pink;
+  display: inline-block;
+  /*width: 350px;*/
+  /*height: 500px;*/
+  margin-left: 5px;
+  }
+  #sidebar{
+    width: 100px;
+  }
+  #content{
+    vertical-align: top;
+    background-color: lightblue;
+  }
+  label{
+    display: block;
+  }

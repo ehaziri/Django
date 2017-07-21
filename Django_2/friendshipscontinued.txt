@@ -1,0 +1,25 @@
+#FRIENDSHIPS CONTINUED
+#1
+       friendships = models.Friendships.objects.all()
+    {% for friendship in users  %}
+    <p>
+      {{friendship.user.first_name}} {{friendship.user.last_name}}
+    </p>
+    {% endfor %}
+#2
+    friendships = models.Friendships.objects.filter(user__first_name="Michael")
+#3
+    friendships = models.Friendships.objects.exclude(user__first_name="Daniel")
+#4
+    friendships = models.Friendships.objects.filter(user__id=1) | models.Friendships.objects.filter(user__last_name="Hernandez")
+#5
+    friendships = (models.Friendships.objects.all().filter(user__id=1)|models.Friendships.objects.all().filter(user__last_name="Hernandez").order_by('friend__first_name')).distinct()
+#6
+    users = models.Users.objects.filter(usersfriend__friend__id=2)
+    print (users.query)
+
+
+
+
+    # number2 = models.Users.objects.get(id=2)
+    # print number2.first_name number2.last_name

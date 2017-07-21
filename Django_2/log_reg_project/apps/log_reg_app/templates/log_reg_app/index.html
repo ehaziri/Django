@@ -1,0 +1,48 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'log_reg_app/css/styles.css' %}" />
+  </head>
+  <body>
+   <div id="wrapper">
+     <div id="header">
+       <div class="messages"
+         {% if messages %}
+           <ul>
+               {% for message in messages %}
+               <li>{{ message }}</li>
+               {% endfor %}
+           </ul>
+         {% endif %}
+     </div>
+   </div><!--end of header-->
+    <div id="sidebar">
+      <h1>Registration</h1>
+      <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <label for="first_name">First Name: <input type="text" name="first_name" /></label>
+        <label for="last_name">Last Name: <input type="text" name="last_name" /></label>
+        <label for="email">Email: <input type="text" name="email" /></label>
+        <label for="birthday">Birthday: <input type="date" name="birthday" /></label>
+        <label for="password">Password: <input type="password" name="password" /></label>
+        <label for="confirm_password">Confirm Password: <input type="password" name="confirm_password" /></label>
+        <input type="submit" class="button-primary" value="Register">
+      </form>
+    </div><!--end of sidebar-->
+
+    <div id="content">
+      <h1>Login</h1>
+      <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <label for="email">Email: <input type="text" name="email" /></label>
+        <label for="password">Password: <input type="password" name="password" /></label>
+        <input type="submit" class="button-primary" value="Login">
+      </form>
+    </div><!--end of content-->
+  </div><!--end of wrapper-->
+  </body>
+</html>

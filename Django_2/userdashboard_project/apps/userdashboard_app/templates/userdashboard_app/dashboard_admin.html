@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'userdashboard_app/css/styles.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <bold>Test App</bold>
+        <a href="{% url 'dashboard:board' %}">Dashboard</a>
+        <a href="{% url 'dashboard:profile' %}">Profile</a>
+        <a href="{% url 'users:logout' %}">Log off</a>
+      </div><!--end of header-->
+
+      <div id="content">
+        <h1>Manage Users</h1>
+        <form action="{% url 'dashboard:add' %}" method="post">
+          {% csrf_token %}
+          <input type="submit" class="button-primary" value="Add new">
+        </form>
+
+        <table>
+          <thead>
+            <td>ID</id>
+            <td>Name^</id>
+            <td>email</id>
+            <td>created_at</id>
+            <td>user_level</id>
+            <td>actions</id>
+          </thead>
+          <tbody>
+            {% for u in users %}
+              <tr>
+                <td>{{u.user.id}}</id>
+                <td>{{u.user.first_name}} {{u.user.last_name}}</td>
+                <td>{{u.user.email}}</td>
+                <td>{{u.user.created_at}}</td>
+                {% if u.level == "9" %}
+                <td>admin</td>
+                {% endif %}
+                {% if u.level == "0" %}
+                <td>normal</td>
+                {% endif %}
+                <td><a href="{% url 'dashboard:edit' id=u.user.id %}">edit</a> <a href="{% url 'dashboard:remove' id=u.user.id %}">remove</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div><!--end of content-->
+   </div><!--end of wrapper-->
+  </body>
+</html>

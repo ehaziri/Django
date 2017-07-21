@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Show user</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'books_app/css/styles.css' %}" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <p>
+          <a href="{% url 'books:index' %}">Home</a>
+          <a href="{% url 'books:add' %}">Add Book and Review</a>
+          <a href="{% url 'users:logout' %}">Logout</a>
+        </p>
+      </div><!--header-->
+
+      <div id="content">
+        <h3>User Alias: {{user.alias}}</h3>
+        <p>Name: {{user.name}}</p>
+        <p>Email: {{user.email}}</p>
+        <p>Total Reviews: {{user.user_reviews.count}}</p>
+        <br />
+        <p>Posted Reviews on the following books</p>
+        <ul>
+        {% for review in reviewed_books %}
+          <li><a href="{% url 'books:show_book' id=review.id %}">{{review.title}}</a></li>
+        {% endfor %}
+       </ul>
+      </div><!--content-->
+    </div><!--wrapper-->
+  </body>
+</html>

@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'courses_app/css/styles.css' %}" />
+  </head>
+  <body>
+   <div id="wrapper">
+    <div id="header">
+       <div class="messages"
+         {% if messages %}
+           <ul>
+               {% for message in messages %}
+               <li>{{ message }}</li>
+               {% endfor %}
+           </ul>
+         {% endif %}
+       </div>
+    </div><!--end of header-->
+    <div id="sidebar">
+      <a href="{% url 'index' %}">Home</a>
+    </div><!--end of sidebar-->
+
+    <div id="content">
+      <h4>Name of the course: {{course.name}}</h4>
+      <h5>Add a new comment</h5>
+      <form action="{% url 'add' id=course.id %}" method="post">
+        {% csrf_token %}
+        <label for="comment">Comment:</label>
+        <textarea name="comment" rows="3">Write...</textarea>
+        <input type="submit" value="Add">
+      </form>
+
+      <h5>Comments</h5>
+      <table>
+        <tr>
+          <th>Total comments: {{course.course_comments.count}}</th>
+        </tr>
+        {% for obj in course.course_comments.all %}
+        <tr>
+          <td>{{ obj.comment }}</td>
+          <td><a href="{% url 'remove_comment' id=obj.id %}">Remove</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div><!--end of content-->
+  </div><!--end of wrapper-->
+  </body>
+</html>

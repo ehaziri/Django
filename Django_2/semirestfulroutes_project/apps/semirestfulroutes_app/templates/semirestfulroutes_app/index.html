@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Index</title>
+    <style>
+      table {
+      border-collapse: collapse;
+      }
+      table, td, th {
+      border: 1px solid black
+      }
+      td, th{
+          padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Products</h1>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+      {% for product in products %}
+      <tr>
+        <td>{{product.name}}</td>
+        <td>{{product.description}}</td>
+        <td>${{product.price}}</td>
+        <td>
+          <form action="/destroy/{{product.id}}" method="post">
+            {% csrf_token %}
+            <a href="/show/{{product.id}}">Show</a>
+            <a href="/edit/{{product.id}}">Edit</a>
+            <input type="submit" value="Remove" />
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <p><a href="/new">Add a new product</a></p>
+  </body>
+</html>

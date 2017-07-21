@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Show</title>
+    <style>
+    label{
+      display: block;
+      margin: 15px 0px;
+    }
+    </style>
+  </head>
+  <body>
+    <h1>Product {{product.id}}</h1>
+    <label for="name">Name: {{product.name}}</label>
+    <label for="description">Description: {{product.description}}</label>
+    <label for="price">Price: ${{product.price}}</label>
+
+    <p><a href="/edit/{{product.id}}">Edit</a> | <a href="/">Back</a></p>
+  </body>
+</html>

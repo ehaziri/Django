@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'wish_app/css/styles.css' %}" />
+  </head>
+  <body>
+   <div id="wrapper">
+     <div id="header">
+       <a href="{% url 'wish:index' %}">Home</a>
+       <a href="{% url 'users:logout' %}">Logout</a>
+   </div><!--end of header-->
+    <div id="sidebar">
+      <div class="messages">
+        {% if messages %}
+          <ul>
+              {% for message in messages %}
+              <li>{{ message }}</li>
+              {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div><!--end of sidebar-->
+
+    <div id="content">
+      <h3>Create a new Wish List Item</h3>
+      <form action="{% url 'wish:add' %}" method="post">
+        {% csrf_token %}
+        <label for="name">Item/Product: <input type="text" name="name" /></label>
+        <input type="submit" class="button-primary" value="Add">
+      </form>
+    </div><!--end of content-->
+  </div><!--end of wrapper-->
+  </body>
+</html>

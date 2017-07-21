@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello Flask</title>
+    {% load staticfiles %}
+    <style>
+    .hidden{
+      visibility: hidden;
+    }
+    .showed{
+      visibility: visible;
+    }
+    </style>
+  </head>
+  <body>
+    <p class="{{teksti}}">No ninjas here.</p>
+    <h1>{{imazhi}}</h1>
+    <img class="{{specific}}" src="{% static 'disninjas/img/' %}{{imazhi}}.jpg" alt="{{imazhi}}">
+
+    <img class="{{ninjas}}" src="{% static 'disninjas/img/donatello.jpg' %}" name="donatello">
+    <img class="{{ninjas}}" src="{% static 'disninjas/img/leonardo.jpg' %}" name="leonardo">
+    <img class="{{ninjas}}" src="{% static 'disninjas/img/michelangelo.jpg' %}" name="michelangelo">
+    <img class="{{ninjas}}" src="{% static 'disninjas/img/raphael.jpg' %}" name="raphael">
+
+
+
+
+  </body>
+</html>

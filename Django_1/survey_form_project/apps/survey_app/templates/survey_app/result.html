@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello Flask</title>
+  </head>
+  <body>
+
+    <h3>Submitted info</h3>
+    <p>Name: <span class="right"> {{ data.name }} </span></p>
+    <p>Dojo Location: <span class="right"> {{ data.location }} </span></p>
+    <p>Favorite Language: <span class="right">{{ data.language }} </span></p>
+    <p>Comment: <span class="right"> {{ data.comment }} </span></p>
+    <form action='/' method="post">
+      {% csrf_token %}
+     <input type="submit" value="Go Back" class="right">
+    </form>
+  </body>
+</html>

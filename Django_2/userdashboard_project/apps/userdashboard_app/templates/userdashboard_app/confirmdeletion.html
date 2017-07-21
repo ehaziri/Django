@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'userdashboard_app/css/styles.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <bold>Test App</bold>
+        <a href="{% url 'dashboard:index' %}">Home</a>
+        <a href="{% url 'dashboard:profile' %}">Profile</a>
+        <a href="{% url 'users:logout' %}">Log off</a>
+      </div><!--end of header-->
+
+      <div id="content">
+        <h1>Confirmation</h1>
+        <p>Are you sure you want to delete user: {{user.first_name}} {{user.last_name}}</p>
+        <form action="{% url 'dashboard:destroy' id=user.id  %}" method="post">
+          {% csrf_token %}
+          <input type="submit" class="button-secondary" value="Yes">
+        </form>
+        <form action="{% url 'dashboard:board' %}" method="post">
+          {% csrf_token %}
+          <input type="submit" class="button-secondary" value="No">
+        </form>
+
+      </div><!--end of content-->
+   </div><!--end of wrapper-->
+  </body>
+</html>
