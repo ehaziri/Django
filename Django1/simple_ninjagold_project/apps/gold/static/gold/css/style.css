@@ -1,0 +1,29 @@
+body{
+  margin: 20px auto;
+  width: 1000px;
+  padding: 10px;
+}
+
+span{
+  display: inline-block;
+}
+
+.kuti{
+  margin: 30px auto;
+  width: 200px;
+  height: 150px;
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+}
+
+.kornize{
+  border: 1px solid black;
+  padding: 2px;
+  width: 50px;
+}
+
+#aktivitetet{
+  width: 900px;
+  height: 200px;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello Flask</title>
+  </head>
+  <body>
+    <form action='/new_user' method='post'>
+			{% csrf_token %}
+      <p>
+      <label for="name">Your name: </label>
+      <input type='text' name='name' class="right">
+     </p>
+
+     <p>
+      <label for="location">Dojo Location: </label>
+      <select name='location' class="right">
+         <option value="San Jose">San Jose</option>
+         <option value="San Francisco">San Francisco</option>
+      </select>
+     </p>
+
+     <p>
+      <label for="language">Favourite Language: </label>
+      <select name='language' class="right">
+         <option value="Python">Python</option>
+         <option value="PHP">PHP</option>
+      </select>
+     </p>
+
+     <p>
+      <label for="comment">Comment (optional): </label>
+      <textarea name="comment" rows = "5" cols="40" class="right"></textarea>
+    </p>
+
+    <p>
+      <input type='submit' value='Button' class="right">
+    </p>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Random</title>
+  </head>
+  <body>
+    <h2>Random Word (attempt #{{request.session.how_many_times}})</h2>
+    <div class="box">
+      {{request.session.random_string}}
+    </div>
+    <form action="/new_string" method="post">
+      	{% csrf_token %}
+        <input type="submit" value="Generate" />
+    </form>
+    <form action="/reset" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Reset" />
+    </form>
+
+  </body>
+</html>
